@@ -1,12 +1,12 @@
-name: test
+name: lint
 
 on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-     steps:
+
+    steps:
       - uses: actions/checkout@v2
         # Step's name
       - name: Use Node.js ${{ matrix.node-version }}
