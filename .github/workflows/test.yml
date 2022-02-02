@@ -1,4 +1,4 @@
-name: lint
+name: test
 
 on: push
 
@@ -27,3 +27,8 @@ jobs:
         # Run Linter
         run: |
           make lint
+          
+      - name: npx jest
+        # test project 
+        run: |
+         make jest
