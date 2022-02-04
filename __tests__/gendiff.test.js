@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { path, dirname } from 'path';
+import path, { dirname } from 'path';
 // import path from 'path';
 
 import findDiff from '../src/fileDiff.js';
