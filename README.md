@@ -7,3 +7,6 @@
 
 5 шаг:
 [![asciicast](https://asciinema.org/a/lICXo5JPop72VFBf1hP7sfrRi.svg)](https://asciinema.org/a/lICXo5JPop72VFBf1hP7sfrRi)
+
+6 шаг:
+[![asciicast](https://asciinema.org/a/HJL4G853WqNTPI45vMpvwaUbn.svg)](https://asciinema.org/a/HJL4G853WqNTPI45vMpvwaUbn)
