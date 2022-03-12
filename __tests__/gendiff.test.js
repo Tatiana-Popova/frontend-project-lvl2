@@ -22,9 +22,9 @@ beforeAll(() => {
   jsonPath2 = getFixturePath('recursiveFile2.json');
   ymlPath1 = getFixturePath('recursiveFile1.yml');
   ymlPath2 = getFixturePath('recursiveFile2.yml');
-  const resultJson = getFixturePath('recursiveResult.txt');
+  const resultTxt = getFixturePath('recursiveResult.txt');
 
-  result = readFileSync(resultJson, 'utf-8');
+  result = readFileSync(resultTxt, 'utf-8');
 });
 
 test('findDifferenceJSON', () => {
