@@ -1,7 +1,6 @@
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
-// import path from 'path';
 
 import findDifferences from '../src/fileDiff.js';
 
@@ -11,7 +10,8 @@ let jsonPath2 = '';
 let ymlPath1 = '';
 let ymlPath2 = '';
 
-let result = '';
+let stylishResult = '';
+let plainResult = '';
 
 beforeAll(() => {
   const __filename = fileURLToPath(import.meta.url);
@@ -22,15 +22,19 @@ beforeAll(() => {
   jsonPath2 = getFixturePath('recursiveFile2.json');
   ymlPath1 = getFixturePath('recursiveFile1.yml');
   ymlPath2 = getFixturePath('recursiveFile2.yml');
-  const resultTxt = getFixturePath('recursiveResult.txt');
+  const stylishResultTxt = getFixturePath('recursiveResult.txt');
+  const plainResultTxt = getFixturePath('recursiveResultPlain.txt');
 
-  result = readFileSync(resultTxt, 'utf-8');
+  stylishResult = readFileSync(stylishResultTxt, 'utf-8');
+  plainResult = readFileSync(plainResultTxt, 'utf-8');
 });
 
 test('findDifferenceJSON', () => {
-  expect(findDifferences(jsonPath1, jsonPath2)).toEqual(result);
+  expect(findDifferences(jsonPath1, jsonPath2, 'stylish')).toEqual(stylishResult);
+  expect(findDifferences(jsonPath1, jsonPath2, 'plain')).toEqual(plainResult);
 });
 
 test('findDifferenceYAML', () => {
-  expect(findDifferences(ymlPath1, ymlPath2)).toEqual(result);
+  expect(findDifferences(ymlPath1, ymlPath2, 'stylish')).toEqual(stylishResult);
+  expect(findDifferences(ymlPath1, ymlPath2, 'plain')).toEqual(plainResult);
 });
