@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import _ from 'lodash';
 import path from 'path';
 import parse from './parsers.js';
-import stylish from './formatters/stylish.js';
+import formatte from './formatters/index.js';
 
 const createDifferencesObject = (object1, object2) => {
   const object1Keys = Object.keys(object1);
@@ -36,14 +36,14 @@ const createDifferencesObject = (object1, object2) => {
   return differences;
 };
 
-const findDifferences = (filepath1, filepath2) => {
+const findDifferences = (filepath1, filepath2, format) => {
   const file1 = readFileSync(path.resolve(process.cwd(), filepath1));
   const file2 = readFileSync(path.resolve(process.cwd(), filepath2));
 
   const parsedFile1 = parse(filepath1, file1);
   const parsedFile2 = parse(filepath2, file2);
   const differences = createDifferencesObject(parsedFile1, parsedFile2);
-  const result = stylish(differences);
+  const result = formatte(differences, format);
   return result;
 };
 
