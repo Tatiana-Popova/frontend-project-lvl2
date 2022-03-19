@@ -5,6 +5,12 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
 
+Вычислитель отличий – программа, определяющая разницу между двумя структурами данных.
+Возможности утилиты:
+
+Поддержка разных входных форматов: yaml, json
+Генерация отчета в виде plain text, stylish и json
+
 5 шаг:
 [![asciicast](https://asciinema.org/a/lICXo5JPop72VFBf1hP7sfrRi.svg)](https://asciinema.org/a/lICXo5JPop72VFBf1hP7sfrRi)
 
@@ -13,3 +19,6 @@
 
 7 шаг:
 [![asciicast](https://asciinema.org/a/IjSLuQlV0NJGRQRUE7PHxr8PD.svg)](https://asciinema.org/a/IjSLuQlV0NJGRQRUE7PHxr8PD)
+
+8 шаг:
+[![asciicast](https://asciinema.org/a/rUXPpt4UVEkTbO3EMT1mE3dz3.svg)](https://asciinema.org/a/rUXPpt4UVEkTbO3EMT1mE3dz3)
