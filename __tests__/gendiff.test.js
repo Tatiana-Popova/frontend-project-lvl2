@@ -12,6 +12,7 @@ let ymlPath2 = '';
 
 let stylishResult = '';
 let plainResult = '';
+let jsonResult = '';
 
 beforeAll(() => {
   const __filename = fileURLToPath(import.meta.url);
@@ -24,17 +25,21 @@ beforeAll(() => {
   ymlPath2 = getFixturePath('recursiveFile2.yml');
   const stylishResultTxt = getFixturePath('recursiveResult.txt');
   const plainResultTxt = getFixturePath('recursiveResultPlain.txt');
+  const jsonResultTxt = getFixturePath('recursiveResultJson.txt');
 
   stylishResult = readFileSync(stylishResultTxt, 'utf-8');
   plainResult = readFileSync(plainResultTxt, 'utf-8');
+  jsonResult = readFileSync(jsonResultTxt, 'utf-8');
 });
 
 test('findDifferenceJSON', () => {
   expect(findDifferences(jsonPath1, jsonPath2, 'stylish')).toEqual(stylishResult);
   expect(findDifferences(jsonPath1, jsonPath2, 'plain')).toEqual(plainResult);
+  expect(findDifferences(jsonPath1, jsonPath2, 'json')).toEqual(jsonResult);
 });
 
 test('findDifferenceYAML', () => {
   expect(findDifferences(ymlPath1, ymlPath2, 'stylish')).toEqual(stylishResult);
   expect(findDifferences(ymlPath1, ymlPath2, 'plain')).toEqual(plainResult);
+  expect(findDifferences(ymlPath1, ymlPath2, 'json')).toEqual(jsonResult);
 });

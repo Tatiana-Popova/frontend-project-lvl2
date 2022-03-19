@@ -1,0 +1,140 @@
+{
+  "common": {
+    "toSimpleCopy": false,
+    "key": "common",
+    "children": {
+      "follow": {
+        "toSimpleCopy": true,
+        "key": "follow",
+        "value": false,
+        "owner": 2
+      },
+      "setting1": {
+        "toSimpleCopy": true,
+        "key": "setting1",
+        "value": [
+          "Value 1",
+          "Value 1"
+        ]
+      },
+      "setting2": {
+        "toSimpleCopy": true,
+        "key": "setting2",
+        "value": 200,
+        "owner": 1
+      },
+      "setting3": {
+        "toSimpleCopy": true,
+        "key": "setting3",
+        "value": [
+          true,
+          null
+        ]
+      },
+      "setting4": {
+        "toSimpleCopy": true,
+        "key": "setting4",
+        "value": "blah blah",
+        "owner": 2
+      },
+      "setting5": {
+        "toSimpleCopy": true,
+        "key": "setting5",
+        "value": {
+          "key5": "value5"
+        },
+        "owner": 2
+      },
+      "setting6": {
+        "toSimpleCopy": false,
+        "key": "setting6",
+        "children": {
+          "doge": {
+            "toSimpleCopy": false,
+            "key": "doge",
+            "children": {
+              "wow": {
+                "toSimpleCopy": true,
+                "key": "wow",
+                "value": [
+                  "",
+                  "so much"
+                ]
+              }
+            }
+          },
+          "key": {
+            "toSimpleCopy": true,
+            "key": "key",
+            "value": [
+              "value",
+              "value"
+            ]
+          },
+          "ops": {
+            "toSimpleCopy": true,
+            "key": "ops",
+            "value": "vops",
+            "owner": 2
+          }
+        }
+      }
+    }
+  },
+  "group1": {
+    "toSimpleCopy": false,
+    "key": "group1",
+    "children": {
+      "baz": {
+        "toSimpleCopy": true,
+        "key": "baz",
+        "value": [
+          "bas",
+          "bars"
+        ]
+      },
+      "foo": {
+        "toSimpleCopy": true,
+        "key": "foo",
+        "value": [
+          "bar",
+          "bar"
+        ]
+      },
+      "nest": {
+        "toSimpleCopy": true,
+        "key": "nest",
+        "value": [
+          {
+            "key": "value"
+          },
+          "str"
+        ]
+      }
+    }
+  },
+  "group2": {
+    "toSimpleCopy": true,
+    "key": "group2",
+    "value": {
+      "abc": 12345,
+      "deep": {
+        "id": 45
+      }
+    },
+    "owner": 1
+  },
+  "group3": {
+    "toSimpleCopy": true,
+    "key": "group3",
+    "value": {
+      "deep": {
+        "id": {
+          "number": 45
+        }
+      },
+      "fee": 100500
+    },
+    "owner": 2
+  }
+}

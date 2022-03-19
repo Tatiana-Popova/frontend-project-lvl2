@@ -7,6 +7,8 @@ const formatte = (differences, format) => {
       return stylish(differences);
     case 'plain':
       return plain(differences);
+    case 'json':
+      return JSON.stringify(differences, null, 2);
     default:
       throw new Error('Format error', format);
   }
