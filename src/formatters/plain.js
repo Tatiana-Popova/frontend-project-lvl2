@@ -36,7 +36,7 @@ const plain = (value) => {
             );
           }
         }
-      } else if (currentValue[key].toSimpleCopy === false) {
+      } else {
         acc.push(iter(currentValue[key].children, `${keyPath}${key}.`));
       }
       return acc;

@@ -4,7 +4,7 @@ import path from 'path';
 import parse from './parsers.js';
 import formatte from './formatters/index.js';
 
-const createDifferencesObject = (object1, object2) => {
+const createDifferencesTree = (object1, object2) => {
   const object1Keys = Object.keys(object1);
   const object2Keys = Object.keys(object2);
   const allSortedKeys = _.sortBy(_.union(object1Keys, object2Keys));
@@ -27,7 +27,7 @@ const createDifferencesObject = (object1, object2) => {
         acc[key] = {
           toSimpleCopy: false,
           key,
-          children: createDifferencesObject(object1[key], object2[key]),
+          children: createDifferencesTree(object1[key], object2[key]),
         };
       }
     }
@@ -36,13 +36,20 @@ const createDifferencesObject = (object1, object2) => {
   return differences;
 };
 
-const findDifferences = (filepath1, filepath2, format) => {
-  const file1 = readFileSync(path.resolve(process.cwd(), filepath1));
-  const file2 = readFileSync(path.resolve(process.cwd(), filepath2));
+const readFile = (filepath) => {
+  const fullPath = path.resolve(process.cwd(), filepath);
+  const data = readFileSync(fullPath).toString();
+  return data;
+};
 
-  const parsedFile1 = parse(filepath1, file1);
-  const parsedFile2 = parse(filepath2, file2);
-  const differences = createDifferencesObject(parsedFile1, parsedFile2);
+const findDifferences = (filepath1, filepath2, format) => {
+  const file1Content = readFile(filepath1);
+  const file2Content = readFile(filepath2);
+
+  const file1AsObject = parse(filepath1, file1Content);
+  const file2AsObject = parse(filepath2, file2Content);
+  if (file1AsObject === null || file2AsObject === null) throw new Error('Format is not supported');
+  const differences = createDifferencesTree(file1AsObject, file2AsObject);
   const result = formatte(differences, format);
   return result;
 };
