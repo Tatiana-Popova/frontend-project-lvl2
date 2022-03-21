@@ -7,6 +7,8 @@ const refineTheSyntaxOfValue = (value) => {
       return '[complex value]';
     case 'boolean':
       return value;
+    case 'number':
+      return value;
     default:
       return `'${value}'`;
   }
