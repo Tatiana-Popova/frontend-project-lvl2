@@ -4,7 +4,7 @@ import path, { dirname } from 'path';
 
 import findDifferences from '../src/fileDiff.js';
 
-let wrongFilePath = '';
+// let wrongFilePath = '';
 let jsonPath1 = '';
 let jsonPath2 = '';
 
@@ -24,7 +24,7 @@ beforeAll(() => {
   jsonPath2 = getFixturePath('recursiveFile2.json');
   ymlPath1 = getFixturePath('recursiveFile1.yml');
   ymlPath2 = getFixturePath('recursiveFile2.yml');
-  wrongFilePath = getFixturePath('wrongFormatFile.png');
+  // wrongFilePath = getFixturePath('wrongFormatFile.png');
   const stylishResultTxt = getFixturePath('recursiveResult.txt');
   const plainResultTxt = getFixturePath('recursiveResultPlain.txt');
   const jsonResultTxt = getFixturePath('recursiveResultJson.txt');
