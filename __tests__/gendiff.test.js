@@ -45,8 +45,3 @@ test('findDifferenceYAML', () => {
   expect(findDifferences(ymlPath1, ymlPath2, 'plain')).toEqual(plainResult);
   expect(findDifferences(ymlPath1, ymlPath2, 'json')).toEqual(jsonResult);
 });
-
-test('Errors', () => {
-  expect(() => findDifferences(wrongFilePath, wrongFilePath)).toThrow('Format is not supported');
-  expect(() => findDifferences(ymlPath1, ymlPath2, 'other')).toThrow('Format error', 'other');
-});

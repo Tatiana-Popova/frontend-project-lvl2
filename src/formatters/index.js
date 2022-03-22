@@ -10,7 +10,7 @@ const formatte = (differences, format) => {
     case 'json':
       return JSON.stringify(differences, null, 2);
     default:
-      throw new Error('Format error', format);
+      throw new Error(`Format not supported: ${format}`);
   }
 };
 
