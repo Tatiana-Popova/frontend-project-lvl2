@@ -42,7 +42,7 @@ const readFile = (filepath) => {
   return data;
 };
 
-const findDifferences = (filepath1, filepath2, format) => {
+const findDifferences = (filepath1, filepath2, format = 'stylish') => {
   const file1Content = readFile(filepath1);
   const file2Content = readFile(filepath2);
 
