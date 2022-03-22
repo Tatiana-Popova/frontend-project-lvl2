@@ -4,7 +4,7 @@ import path, { dirname } from 'path';
 
 import findDifferences from '../src/fileDiff.js';
 
-// let wrongFilePath = '';
+let wrongFilePath = '';
 let jsonPath1 = '';
 let jsonPath2 = '';
 
@@ -24,7 +24,7 @@ beforeAll(() => {
   jsonPath2 = getFixturePath('recursiveFile2.json');
   ymlPath1 = getFixturePath('recursiveFile1.yml');
   ymlPath2 = getFixturePath('recursiveFile2.yml');
-  // wrongFilePath = getFixturePath('wrongFormatFile.png');
+  wrongFilePath = getFixturePath('wrongFormatFile.png');
   const stylishResultTxt = getFixturePath('recursiveResult.txt');
   const plainResultTxt = getFixturePath('recursiveResultPlain.txt');
   const jsonResultTxt = getFixturePath('recursiveResultJson.txt');
@@ -44,4 +44,9 @@ test('findDifferenceYAML', () => {
   expect(findDifferences(ymlPath1, ymlPath2, 'stylish')).toEqual(stylishResult);
   expect(findDifferences(ymlPath1, ymlPath2, 'plain')).toEqual(plainResult);
   expect(findDifferences(ymlPath1, ymlPath2, 'json')).toEqual(jsonResult);
+});
+
+test('Errors', () => {
+  expect(() => findDifferences(wrongFilePath, wrongFilePath)).toThrow('Format is not supported');
+  expect(() => findDifferences(ymlPath1, ymlPath2, 'other')).toThrow('Format not supported: other');
 });
