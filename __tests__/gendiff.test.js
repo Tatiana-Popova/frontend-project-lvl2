@@ -1,52 +1,69 @@
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
+import _ from 'lodash';
 
 import findDifferences from '../src/fileDiff.js';
 
-let wrongFilePath = '';
-let jsonPath1 = '';
-let jsonPath2 = '';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-let ymlPath1 = '';
-let ymlPath2 = '';
+const filesToCheck = [
+  ['file1.json', 'file2.json'],
+  ['file1.yml', 'file2.yml'],
+  ['wrongFormatFile.png'],
+];
+const resultFiles = ['stylishResult.txt', 'plainResult.txt', 'jsonResult.txt'];
 
-let stylishResult = '';
-let plainResult = '';
-let jsonResult = '';
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-beforeAll(() => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = dirname(__filename);
-  const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const getAbsolutePaths = (fixtures) => {
+  const absolutePaths = fixtures.map((filename) => {
+    if (!_.isArray(filename)) {
+      return getFixturePath(filename);
+    }
+    return getAbsolutePaths(filename);
+  });
+  return absolutePaths;
+};
 
-  jsonPath1 = getFixturePath('recursiveFile1.json');
-  jsonPath2 = getFixturePath('recursiveFile2.json');
-  ymlPath1 = getFixturePath('recursiveFile1.yml');
-  ymlPath2 = getFixturePath('recursiveFile2.yml');
-  wrongFilePath = getFixturePath('wrongFormatFile.png');
-  const stylishResultTxt = getFixturePath('recursiveResult.txt');
-  const plainResultTxt = getFixturePath('recursiveResultPlain.txt');
-  const jsonResultTxt = getFixturePath('recursiveResultJson.txt');
+const absoluteFilePaths = getAbsolutePaths(filesToCheck);
+const absoluteResultPaths = getAbsolutePaths(resultFiles);
 
-  stylishResult = readFileSync(stylishResultTxt, 'utf-8');
-  plainResult = readFileSync(plainResultTxt, 'utf-8');
-  jsonResult = readFileSync(jsonResultTxt, 'utf-8');
+const results = absoluteResultPaths.map((resultPath) => readFileSync(resultPath, 'utf-8'));
+
+test('STYLISH', () => {
+  expect(findDifferences(absoluteFilePaths[0][0], absoluteFilePaths[0][1], 'stylish')).toBe(
+    results[0],
+  );
+  expect(findDifferences(absoluteFilePaths[1][0], absoluteFilePaths[1][1], 'stylish')).toBe(
+    results[0],
+  );
 });
 
-test('findDifferenceJSON', () => {
-  expect(findDifferences(jsonPath1, jsonPath2, 'stylish')).toEqual(stylishResult);
-  expect(findDifferences(jsonPath1, jsonPath2, 'plain')).toEqual(plainResult);
-  expect(findDifferences(jsonPath1, jsonPath2, 'json')).toEqual(jsonResult);
+test('PLAIN', () => {
+  expect(findDifferences(absoluteFilePaths[0][0], absoluteFilePaths[0][1], 'plain')).toBe(
+    results[1],
+  );
+  expect(findDifferences(absoluteFilePaths[1][0], absoluteFilePaths[1][1], 'plain')).toBe(
+    results[1],
+  );
 });
 
-test('findDifferenceYAML', () => {
-  expect(findDifferences(ymlPath1, ymlPath2, 'stylish')).toEqual(stylishResult);
-  expect(findDifferences(ymlPath1, ymlPath2, 'plain')).toEqual(plainResult);
-  expect(findDifferences(ymlPath1, ymlPath2, 'json')).toEqual(jsonResult);
+test('JSON', () => {
+  expect(findDifferences(absoluteFilePaths[0][0], absoluteFilePaths[0][1], 'json')).toBe(
+    results[2],
+  );
+  expect(findDifferences(absoluteFilePaths[1][0], absoluteFilePaths[1][1], 'json')).toBe(
+    results[2],
+  );
 });
 
-test('Errors', () => {
-  expect(() => findDifferences(wrongFilePath, wrongFilePath)).toThrow('Format is not supported');
-  expect(() => findDifferences(ymlPath1, ymlPath2, 'other')).toThrow('Format not supported: other');
+test('ERRORS', () => {
+  expect(() => findDifferences(absoluteFilePaths[2][0], absoluteFilePaths[2][0])).toThrow(
+    'Format is not supported',
+  );
+  expect(() => findDifferences(absoluteFilePaths[0][0], absoluteFilePaths[0][1], 'other')).toThrow(
+    'Format not supported: other',
+  );
 });
