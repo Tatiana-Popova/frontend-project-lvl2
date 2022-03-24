@@ -24,35 +24,30 @@ const stylish = (value, replacer = ' ', spacesCount = 2) => {
     const indentSize = depth * spacesCount;
     const currentIndent = replacer.repeat(indentSize);
     const bracketIndent = replacer.repeat(indentSize - spacesCount);
-    const lines = objectKeys.reduce((acc, key) => {
+    const lines = objectKeys.map((key) => {
       if (currentValue[key].toSimpleCopy === true) {
         if (!Array.isArray(currentValue[key].value)) {
           const insignia = currentValue[key].owner === 1 ? insignias[1] : insignias[2];
-          acc.push(
-            `${currentIndent}${insignia}${key}: ${stringify(currentValue[key].value, depth)}`,
-          );
+          return `${currentIndent}${insignia}${key}: ${stringify(currentValue[key].value, depth)}`;
         }
         if (Array.isArray(currentValue[key].value)) {
           const value1 = currentValue[key].value[0];
           const value2 = currentValue[key].value[1];
           if (value1 === value2) {
-            acc.push(`${currentIndent}${insignias[0]}${key}: ${stringify(value1, depth)}`);
-          } else {
-            acc.push(`${currentIndent}${insignias[1]}${key}: ${stringify(value1, depth)}`);
-            acc.push(`${currentIndent}${insignias[2]}${key}: ${stringify(value2, depth)}`);
+            return `${currentIndent}${insignias[0]}${key}: ${stringify(value1, depth)}`;
           }
+          return [
+            `${currentIndent}${insignias[1]}${key}: ${stringify(value1, depth)}`,
+            `${currentIndent}${insignias[2]}${key}: ${stringify(value2, depth)}`,
+          ];
         }
-      } else if (currentValue[key].toSimpleCopy === false) {
-        acc.push(
-          `${currentIndent}${insignias[0]}${key}: ${iter(
-            currentValue[key].children,
-            depth + spacesCount,
-          )}`,
-        );
       }
-      return acc;
-    }, []);
-    return ['{', ...lines, `${bracketIndent}}`].join('\n');
+      return `${currentIndent}${insignias[0]}${key}: ${iter(
+        currentValue[key].children,
+        depth + spacesCount,
+      )}`;
+    });
+    return ['{', ...lines, `${bracketIndent}}`].flat().join('\n');
   };
   return iter(value, 1);
 };
