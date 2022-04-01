@@ -1,8 +1,8 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-const formatte = (differences, format) => {
-  switch (format) {
+const format = (differences, style) => {
+  switch (style) {
     case 'stylish':
       return stylish(differences);
     case 'plain':
@@ -10,8 +10,8 @@ const formatte = (differences, format) => {
     case 'json':
       return JSON.stringify(differences, null, 2);
     default:
-      throw new Error(`Format not supported: ${format}`);
+      throw new Error(`Format not supported: ${style}`);
   }
 };
 
-export default formatte;
+export default format;

@@ -1,14 +1,14 @@
 import yaml from 'js-yaml';
 
-const parse = (fileExtname, file) => {
-  switch (fileExtname) {
+const parse = (format, data) => {
+  switch (format) {
     case 'json':
-      return JSON.parse(file);
+      return JSON.parse(data);
     case 'yml':
     case 'yaml':
-      return yaml.load(file);
+      return yaml.load(data);
     default:
-      return null;
+      throw new Error('Format is not supported');
   }
 };
 
